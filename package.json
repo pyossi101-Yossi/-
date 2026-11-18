@@ -1,0 +1,23 @@
+{
+  "name": "nadlanh-app",
+  "version": "1.0.0",
+  "private": true,
+  "description": "EXPO נדל\"ן - אפליקציית אנדרואיד המסונכרנת עם nadlanh.co.il",
+  "scripts": {
+    "sync": "cap sync android",
+    "open": "cap open android",
+    "icons": "capacitor-assets generate --android"
+  },
+  "dependencies": {
+    "@capacitor/android": "^6.2.3",
+    "@capacitor/app": "^6.0.3",
+    "@capacitor/core": "^6.2.3",
+    "@capacitor/network": "^6.0.4",
+    "@capacitor/splash-screen": "^6.0.4",
+    "@capacitor/status-bar": "^6.0.3"
+  },
+  "devDependencies": {
+    "@capacitor/assets": "^3.0.5",
+    "@capacitor/cli": "^6.2.3"
+  }
+}

@@ -1,0 +1,24 @@
+{
+  "appId": "il.co.nadlanh.app",
+  "appName": "EXPO נדל\"ן",
+  "webDir": "www",
+  "server": {
+    "url": "https://nadlanh.co.il/",
+    "allowNavigation": ["nadlanh.co.il", "*.nadlanh.co.il"],
+    "errorPath": "offline.html",
+    "androidScheme": "https"
+  },
+  "android": {
+    "allowMixedContent": false,
+    "captureInput": true,
+    "webContentsDebuggingEnabled": false
+  },
+  "plugins": {
+    "SplashScreen": {
+      "launchShowDuration": 1500,
+      "launchAutoHide": true,
+      "backgroundColor": "#ffffff",
+      "showSpinner": false
+    }
+  }
+}

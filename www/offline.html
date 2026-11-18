@@ -1,0 +1,26 @@
+<!doctype html>
+<html lang="he" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>אין חיבור לאינטרנט</title>
+<style>
+  body{margin:0;min-height:100vh;display:flex;align-items:center;justify-content:center;
+       font-family:system-ui,-apple-system,"Segoe UI",Arial,sans-serif;background:#fff;color:#1a1a1a;text-align:center;padding:24px;box-sizing:border-box}
+  .box{max-width:340px}
+  .icon{font-size:56px;margin-bottom:12px}
+  h1{font-size:22px;margin:0 0 8px}
+  p{color:#555;margin:0 0 24px;line-height:1.5}
+  button{font:inherit;font-size:17px;padding:12px 32px;border:0;border-radius:10px;background:#1a1a1a;color:#fff}
+</style>
+</head>
+<body>
+<div class="box">
+  <div class="icon">📡</div>
+  <h1>אין חיבור לאינטרנט</h1>
+  <p>בדקו את החיבור ונסו שוב. האפליקציה מציגה את התוכן העדכני ביותר מאתר EXPO נדל"ן.</p>
+  <button onclick="location.href='https://nadlanh.co.il/'">נסו שוב</button>
+</div>
+<script>window.addEventListener('online',()=>location.href='https://nadlanh.co.il/');</script>
+</body>
+</html>

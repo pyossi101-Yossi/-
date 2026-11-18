@@ -1,0 +1,54 @@
+name: בניית אפליקציית אנדרואיד
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [main, 'claude/**']
+    tags: ['v*']
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    env:
+      HAS_KEYSTORE: ${{ secrets.ANDROID_KEYSTORE_BASE64 != '' }}
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: 17
+
+      - name: התקנת תלויות וסנכרון
+        run: |
+          npm ci
+          npx cap sync android
+
+      - name: בניית APK לבדיקה (debug)
+        working-directory: android
+        run: ./gradlew assembleDebug
+
+      - name: שחזור מפתח חתימה
+        if: env.HAS_KEYSTORE == 'true'
+        run: echo "${{ secrets.ANDROID_KEYSTORE_BASE64 }}" | base64 -d > android/app/release.keystore
+
+      - name: בניית AAB חתום ל-Google Play
+        if: env.HAS_KEYSTORE == 'true'
+        working-directory: android
+        env:
+          KEYSTORE_PASSWORD: ${{ secrets.ANDROID_KEYSTORE_PASSWORD }}
+          KEY_ALIAS: ${{ secrets.ANDROID_KEY_ALIAS }}
+          KEY_PASSWORD: ${{ secrets.ANDROID_KEY_PASSWORD }}
+        run: ./gradlew bundleRelease -PversionCode=${{ github.run_number }}
+
+      - uses: actions/upload-artifact@v4
+        with:
+          name: nadlanh-android
+          path: |
+            android/app/build/outputs/apk/debug/*.apk
+            android/app/build/outputs/bundle/release/*.aab
